@@ -72,7 +72,6 @@ def get_current_temperature_sync(city, api_key):
         }
     )
     if response.status_code == 401:
-        print(response.json())
         raise InvalidAPIKeyError()
     return response.json()['main']['temp']
 
