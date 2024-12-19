@@ -87,15 +87,14 @@ if uploaded_file:
     api_key = st.text_input("Введите ваш OpenWeatherMap API Key", type="password")
     
     if api_key:
-        city_name = selected_city
         # Получение текущего сезона и температуры
         current_season = determine_current_season(dt.datetime.now().date())
         try:
-            current_temp = get_current_temperature_sync(city_name, api_key)
+            current_temp = get_current_temperature_sync(selected_city, api_key)
         except InvalidAPIKeyError as e:
             st.error(e.detail)
         else:
-            st.write(f"Текущая температура в {city_name}: {current_temp} °C")
+            st.write(f"Текущая температура в {selected_city}: {current_temp} °C")
 
             normal = is_temperature_normal(city_analysis, current_temp, current_season)
             if normal:
